@@ -4,7 +4,7 @@ use std::io;
 fn main() {
     println!("Convert between Fahrenheit and Celsius");
 
-    // grab the input from user
+    // grab the input from user 
     let mut temp_in_fahrenheit = String::new();
     io::stdin()
         .read_line(&mut temp_in_fahrenheit)
@@ -17,7 +17,6 @@ fn main() {
     };
     let temp_in_celsius = convert_between_fahrenheit_celsius(temp_in_fahrenheit);
     println!("{}°F is {}°C", temp_in_fahrenheit, temp_in_celsius);
-
 }
 
 /// This function takes a temperature in fahrenheit and returns the temperature in celsius
