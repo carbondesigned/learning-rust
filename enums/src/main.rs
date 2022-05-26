@@ -1,28 +1,28 @@
-enum IpAddr {
-    // V4(String),
-    V4(u8,u8,u8,u8),
-    V6(String),
+struct QuitMessage;
+struct MoveMessage {
+    x: i32,
+    y: i32,
 }
-// enum IpAddrKind {
-//     V4,
-//     V6,
-// }
+struct WriteMessage(String);
+struct ChangeColorMessage(i32,i32,i32);
 
-// struct IpAddr {
-//     kind: IpAddrKind,
-//     address: String,
-// }
+enum Message {
+    Quit,
+    Move {x: i32, y: i32},
+    Write(String),
+    ChangeColor(i32,i32,i32),
+}
+
+impl Message {
+    fn call(&self) {
+        // ...
+    }
+}
 
 fn main() {
-
-    // detail of how enums work: 
-    // the name of each enum variant that we define also becomes a function that constructs an instance of the enum. 
-    // That is, IpAddr::V4() is a function call that takes a String argument and returns an instance of the IpAddr type. 
-    // We automatically get this constructor function defined as a result of defining the enum.
-    let home = IpAddr::V4(127,0,0,1);
-    let loopback = IpAddr::V6(String::from("::1"));
-    // let home = IpAddr {
-    //     kind: IpAddrKind::V4,
-    //     address: String::from("127.0.0.1"),
-    // };
+    //The body of the method would use self to get the value that we called the method on. 
+    // In this example, we’ve created a variable m that has the value Message::Write(String::from("hello")), 
+    // and that is what self will be in the body of the call method when m.call() runs.
+    let m = Message::Write(String::from("hello"));
+    (m);
 }
