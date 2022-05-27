@@ -1,28 +1,12 @@
-struct QuitMessage;
-struct MoveMessage {
-    x: i32,
-    y: i32,
-}
-struct WriteMessage(String);
-struct ChangeColorMessage(i32,i32,i32);
+fn main () {
+    // Some(T), None are included in the prelude, but just to be clear.
+    let some_number: Option<i32> = Option::Some(5);
+    let some_number: Option<&str> = Option::Some("this is a string");
 
-enum Message {
-    Quit,
-    Move {x: i32, y: i32},
-    Write(String),
-    ChangeColor(i32,i32,i32),
-}
+    // can't infer None.
+    let null_number: Option<i32> = Option::None;
 
-impl Message {
-    fn call(&self) {
-        // ...
-    }
-}
-
-fn main() {
-    //The body of the method would use self to get the value that we called the method on. 
-    // In this example, we’ve created a variable m that has the value Message::Write(String::from("hello")), 
-    // and that is what self will be in the body of the call method when m.call() runs.
-    let m = Message::Write(String::from("hello"));
-    (m);
+    // you have to convert an Option<T> to a T before you can perform T operations with it. 
+    // Generally, this helps catch one of the most common issues with null: assuming that something isn’t null when it actually is.
+    // https://doc.rust-lang.org/std/option/enum.Option.html
 }
