@@ -1,12 +1,19 @@
 fn main () {
-    // Some(T), None are included in the prelude, but just to be clear.
-    let some_number: Option<i32> = Option::Some(5);
-    let some_number: Option<&str> = Option::Some("this is a string");
+    // match - allows to comapre a value against a series of patterns
+   // think of it as being like a `coin-sorting` machine.
+   enum Coin {
+       Penny,
+       Nickel,
+       Dime,
+       Quarter
+   }
 
-    // can't infer None.
-    let null_number: Option<i32> = Option::None;
-
-    // you have to convert an Option<T> to a T before you can perform T operations with it. 
-    // Generally, this helps catch one of the most common issues with null: assuming that something isn’t null when it actually is.
-    // https://doc.rust-lang.org/std/option/enum.Option.html
+    fn value_in_cents(coin: Coin) -> u8 {
+        match coin {
+            Coin::Penny => 1,
+            Coin::Nickel => 5,
+            Coin::Dime => 10,
+            Coin::Quarter => 25,
+        } 
+    }
 }
