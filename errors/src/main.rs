@@ -1,25 +1,38 @@
-use std::{fs::File, io::ErrorKind};
+use std::{
+    fs::{File, self},
+    io::{self, ErrorKind, Read},
+};
 
-fn main() {
+fn main() {}
 
-    // If the Result value is the Ok variant, unwrap will return the value inside the Ok. 
-    // If the Result is the Err variant, unwrap will call the panic! macro for us.
-    let f = File::open("hello.txt").unwrap();
+// fn read_username_from_file() -> Result<String, io::Error> {
+//     let f = File::open("hello.txt");
+//
+//     let mut f = match f {
+//         Ok(file) => file,
+//         Err(e) => return Err(e),
+//     };
+//
+//     let mut s = String::new();
+//
+//     // no need to call `return` because it is the last expression in the function.
+//     match f.read_to_string(&mut s) {
+//         Ok(_) => Ok(s),
+//         Err(e) => Err(e),
+//     }
+// }
 
-    // works similarly to unwrap() but expect uses a manual error message
-    // let f = File::open("hello.txt").expect("a good error message");
+fn read_username_from_file() -> Result<String, io::Error> {
+    // let mut s = String::new();
+    //
+    // File::open("hello.txt")?.read_to_string(&mut s)?;
+    //
+    // Ok(s)
 
-    // let _f = match f {
-    //     Ok(file) => file,
-    //     Err(error) => match error.kind() {
-    //         // looking for a file that doesn't exist
-    //         ErrorKind::NotFound => match File::create("hello.txt") {
-    //             Ok(fc) => fc,
-    //             Err(e) => panic!("Problem Creating file: {:?}", e),
-    //         },
-    //         other_err => {
-    //             panic!("Problem opening file: {:?}", other_err)
-    //         }
-    //     },
-    // };
+    // even shorter
+    fs::read_to_string("hello.txt")
+}
+
+fn last_char_of_first_line(text: &str) -> Option<char> {
+    text.lines().next()?.chars().last()
 }
